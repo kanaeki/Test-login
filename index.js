@@ -4,7 +4,7 @@ dotenv.config()
 const express=require('express')
 
 const mongoose=require('mongoose')
-const indexRouter=require('./index')
+const indexRouter=require('./app')
 const app=express()
 
 const port=8080
