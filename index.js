@@ -7,7 +7,7 @@ const mongoose=require('mongoose')
 const indexRouter=require('./app')
 const app=express()
 
-const PORT=8080
+const PORT=3000
 
 const connectDB = async () => {
   try {
