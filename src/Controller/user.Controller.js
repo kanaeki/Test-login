@@ -13,6 +13,10 @@ const Register=async(req,res)=>{
         if(!Constraints.emailPattern.test(Email)||!Constraints.passwordPattern.test(password)){
             return res.status(400).send("Please Enter Valid Credentials");
         }
+        const duplicateEmail=await userModel.findOne({Email:Email})
+        if(duplicateEmail){
+            res.send("Email is already Registered")
+        }else{
         const userObj=new userModel({
             Email:Email,
             password:password
@@ -21,6 +25,7 @@ const Register=async(req,res)=>{
         await userObj.save().then((result)=>{
             return res.status(200).send("Registered Successfully")
         })
+        }
     } catch (error) {
         console.log(error);
         res.status(404).send('Something Went Wrong')
