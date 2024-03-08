@@ -66,6 +66,10 @@ const forgetPassword=async(req,res)=>{
         res.status(404).send("Something Went Wrong")
     }
 }
+
+const check=async(req,res)=>{
+    res.send("i m working")
+    }
 module.exports={
-    Register,logIn,forgetPassword
+    Register,logIn,forgetPassword,check
 }
