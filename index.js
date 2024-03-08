@@ -7,8 +7,23 @@ const mongoose=require('mongoose')
 const indexRouter=require('./app')
 const app=express()
 
-const port=8080
-mongoose.connect(process.env.DB)
+const PORT=8080
+
+const connectDB = async () => {
+  try {
+    const conn = await  mongoose.connect(process.env.DB)
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+}
+
+
+
+
+
+
 app.use(express.json())
 
 app.use('/api',indexRouter)
@@ -19,8 +34,11 @@ app.use((req, res, next) => {
 });
 
 
-app.listen(process.env.PORT||port,()=>{
-    console.log(`Listening on ${process.env.PORT}`)
+
+connectDB().then(() => {
+    app.listen(process.env.PORT||PORT, () => {
+        console.log("listening for requests");
+    })
 })
 
 
